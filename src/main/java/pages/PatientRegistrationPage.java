@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class PatientRegistrationPage extends BasePage {
 
     @FindBy(name = "givenName")
@@ -13,10 +15,13 @@ public class PatientRegistrationPage extends BasePage {
     @FindBy(name = "familyName")
     private WebElement familyNameInput;
 
-    @FindBy(name = "gender")
-    private WebElement genderSelect;
+    @FindBy(css = "input[name='gender']")
+    private List<WebElement> genderSelect;
 
-    @FindBy(xpath = "//span[@data-type='day']")
+    @FindBy(css = "div[id='birthdate']>div")
+    private WebElement birthdayInput;
+
+    @FindBy(xpath = "div[id='birthdate']")
     private WebElement birthdateDaySpan;
 
     @FindBy(xpath = "//span[@data-type='month']")
@@ -49,6 +54,13 @@ public class PatientRegistrationPage extends BasePage {
         LOGGER.info("Hasta adı girildi: " + firstName + " " + familyName);
     }
 
+    public void selectGender(final int gender) {
+        clickElement(genderSelect.get(gender));
+    }
+
+    public void selectBirthday(final String birthDay) {
+        sendKeysToElement(birthdayInput, birthDay);
+    }
     public void selectPatientGender(String genderText) {
         try {
             String genderXPath = "//span[text()='" + genderText + "']";
@@ -88,14 +100,13 @@ public class PatientRegistrationPage extends BasePage {
         LOGGER.info("'Register patient' butonuna tıklandı.");
     }
 
-    public void fillAndSubmitRegistrationForm(String fName, String lName, String gender, String dob, String address) {
+    public void fillAndSubmitRegistrationForm(String fName, String lName, int gender, String dob, String address) {
         LOGGER.info("Hasta kayıt formu dolduruluyor...");
         enterPatientName(fName, lName);
-        selectPatientGender(gender);
-        enterPatientBirthdate(dob);
+        selectGender(gender);
+        selectBirthday(dob);
         enterPatientAddress(address);
         clickRegisterPatientButton();
         LOGGER.info("----Hasta kayıt formu gönderildi.----");
-
     }
 }

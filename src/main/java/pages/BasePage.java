@@ -52,6 +52,7 @@ public class BasePage {
     public void sendKeysToElement(final WebElement element, final String text) {
         wait.until(ExpectedConditions.visibilityOf(element));
         try {
+            element.click();
             element.clear();
             element.sendKeys(text);
             LOGGER.debug("Text sent to element");

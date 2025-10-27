@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Report Example">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
+    <test name="Create new patient">
+        <parameter name="username" value="admin"/>
+        <parameter name="password" value="Admin123"/>
+        <classes>
+            <class name="TC_404"/>
+        </classes>
+    </test>
+    <test name="Login with invalid credentials">
+        <classes>
+            <class name="TC_401"/>
+        </classes>
+    </test>
+</suite>
