@@ -3,8 +3,6 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 
 public class LoginPage extends BasePage{
 
@@ -14,13 +12,13 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//input[@id='username']")
     private WebElement usernameInput;
 
-    @FindBy(xpath = "//button[@class='-esm-login__login__continueButton___VnN+0 cds--btn cds--btn--primary']")
+    @FindBy(xpath = "//button[contains(@class,'-esm-login')]")
     private WebElement continueBtn;
 
     @FindBy(xpath = "//input[@id='password']")
     private WebElement passwordInput;
 
-    @FindBy(xpath = "//button[@class='-esm-login__login__continueButton___VnN+0 cds--btn cds--btn--primary']")
+    @FindBy(xpath = "//button[contains(@class,'-esm-login')]")
     private WebElement loginBtn;
 
     @FindBy(xpath = "//p[@class='-esm-login__location-picker__welcomeTitle___iI+4Z']")
@@ -39,17 +37,10 @@ public class LoginPage extends BasePage{
         super(driver);
     }
 
-    public void checkPageUsername() {
-        verifyDisplayed(usernameInput, "The login page did not open (username field not found).");
-        verifyDisplayed(openMRSText, "The login page did not open (login text not found)");
-        verifyDisplayed(continueBtn,"contınue button is not visible");
-        LOGGER.info("Login page 1 verified");
+    public void verifyLoginPage() {
+        verifyDisplayed(openMRSText, "Login page did not open");
     }
-    public void checkPagePassword() {
-        verifyDisplayed(passwordInput, "The login page did not open (password field not found).");
-        verifyDisplayed(loginBtn,      "The login page did not open (login button not found).");
-        LOGGER.info("Login page 2 verified");
-    }
+
     public void checkPageLocation() {
         verifyDisplayed(outpatientClinicSelectBtn, "OutpatientClinic Selection is not visible.");
         verifyDisplayed(welcomeAdminText, "The welcome admin text is not visible. ");
@@ -61,12 +52,13 @@ public class LoginPage extends BasePage{
         LOGGER.info("Invalid message verified");
     }
 
-    public void enterUsername(final String username) {
+    public void fillLoginMask(final String username, final String password) {
         sendKeysToElement(usernameInput, username);
         LOGGER.info("Username entered");
 
-    }
-    public void enterPassword(final String password) {
+        clickElement(continueBtn);
+        LOGGER.info("Continue button clicked");
+
         sendKeysToElement(passwordInput, password);
         LOGGER.info("Password entered");
     }

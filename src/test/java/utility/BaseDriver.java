@@ -13,10 +13,14 @@ public class BaseDriver {
 
     public static WebDriver driver(String url, String browser) {
 
-        switch (browser) {
-            case "chrome": driver = new ChromeDriver();break;
-            case "firefox": driver = new FirefoxDriver();break;
-            case "safari": driver = new SafariDriver();break;
+        if (browser == null) {
+            driver = new ChromeDriver();
+        } else {
+            switch (browser) {
+                case "chrome": driver = new ChromeDriver();break;
+                case "firefox": driver = new FirefoxDriver();break;
+                case "safari": driver = new SafariDriver();break;
+            }
         }
         driver.get(url);
         driver.manage().window().maximize();
