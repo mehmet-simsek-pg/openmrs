@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TC_402">
+    <test name="Login with valid credentials">
+        <parameter name="username" value="admin"/>
+        <parameter name="password" value="Admin123"/>
+        <classes>
+            <class name="TC_402"/>
+        </classes>
+    </test>
+</suite>
