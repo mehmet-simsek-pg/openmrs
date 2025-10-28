@@ -4,6 +4,25 @@
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
     </listeners>
+    <test name="Login with invalid credentials(6 attempts)">
+        <classes>
+            <class name="TC_401"/>
+        </classes>
+    </test>
+    <test name="Login with valid credentials">
+        <parameter name="username" value="admin"/>
+        <parameter name="password" value="Admin123"/>
+        <classes>
+            <class name="TC_402"/>
+        </classes>
+    </test>
+    <test name="Logout">
+        <parameter name="username" value="admin"/>
+        <parameter name="password" value="Admin123"/>
+        <classes>
+            <class name="TC_403"/>
+        </classes>
+    </test>
     <test name="Create new patient">
         <parameter name="username" value="admin"/>
         <parameter name="password" value="Admin123"/>
@@ -11,9 +30,5 @@
             <class name="TC_404"/>
         </classes>
     </test>
-    <test name="Login with invalid credentials">
-        <classes>
-            <class name="TC_401"/>
-        </classes>
-    </test>
+
 </suite>
